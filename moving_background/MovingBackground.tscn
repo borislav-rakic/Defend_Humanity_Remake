@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/DH_background_remake.png" type="Texture" id=1]
+[ext_resource path="res://moving_background/MovingBackground.gd" type="Script" id=2]
+
+[node name="MovingBackground" type="CanvasLayer"]
+layer = -1
+script = ExtResource( 2 )
+
+[node name="Background1" type="TextureRect" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background2" type="TextureRect" parent="."]
+margin_left = 1024.15
+margin_top = 0.0507345
+margin_right = 2048.15
+margin_bottom = 600.051
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

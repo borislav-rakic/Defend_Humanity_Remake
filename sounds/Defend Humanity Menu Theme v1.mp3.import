@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Defend Humanity Menu Theme v1.mp3-9b698aff411ba4b3034f0e64f5eec05a.mp3str"
+
+[deps]
+
+source_file="res://sounds/Defend Humanity Menu Theme v1.mp3"
+dest_files=[ "res://.import/Defend Humanity Menu Theme v1.mp3-9b698aff411ba4b3034f0e64f5eec05a.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

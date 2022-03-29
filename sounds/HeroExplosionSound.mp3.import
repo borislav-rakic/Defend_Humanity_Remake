@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/HeroExplosionSound.mp3-ec7ba4328f7a063d91b88b4600b07704.mp3str"
+
+[deps]
+
+source_file="res://sounds/HeroExplosionSound.mp3"
+dest_files=[ "res://.import/HeroExplosionSound.mp3-ec7ba4328f7a063d91b88b4600b07704.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

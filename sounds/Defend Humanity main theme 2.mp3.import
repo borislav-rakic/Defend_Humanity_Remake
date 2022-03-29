@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Defend Humanity main theme 2.mp3-e44ae95a9e7ce094b93ef8144aae0f2f.mp3str"
+
+[deps]
+
+source_file="res://sounds/Defend Humanity main theme 2.mp3"
+dest_files=[ "res://.import/Defend Humanity main theme 2.mp3-e44ae95a9e7ce094b93ef8144aae0f2f.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

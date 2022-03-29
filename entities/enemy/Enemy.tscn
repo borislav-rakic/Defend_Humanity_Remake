@@ -1,0 +1,91 @@
+[gd_scene load_steps=26 format=2]
+
+[ext_resource path="res://assets/Alien Ship v4 animated-2.png" type="Texture" id=1]
+[ext_resource path="res://assets/Alien Ship v4 animated-1.png" type="Texture" id=2]
+[ext_resource path="res://entities/enemy/Enemy.gd" type="Script" id=3]
+[ext_resource path="res://assets/explosion-3.png" type="Texture" id=4]
+[ext_resource path="res://assets/explosion-2.png" type="Texture" id=5]
+[ext_resource path="res://assets/explosion-6.png" type="Texture" id=6]
+[ext_resource path="res://assets/explosion-9.png" type="Texture" id=7]
+[ext_resource path="res://assets/explosion-13.png" type="Texture" id=8]
+[ext_resource path="res://assets/explosion-8.png" type="Texture" id=9]
+[ext_resource path="res://assets/explosion-10.png" type="Texture" id=10]
+[ext_resource path="res://assets/explosion-12.png" type="Texture" id=11]
+[ext_resource path="res://assets/explosion-11.png" type="Texture" id=12]
+[ext_resource path="res://assets/explosion-5.png" type="Texture" id=13]
+[ext_resource path="res://assets/explosion-15.png" type="Texture" id=14]
+[ext_resource path="res://assets/explosion-4.png" type="Texture" id=15]
+[ext_resource path="res://assets/explosion-1.png" type="Texture" id=16]
+[ext_resource path="res://assets/explosion-7.png" type="Texture" id=17]
+[ext_resource path="res://assets/explosion-14.png" type="Texture" id=18]
+[ext_resource path="res://entities/explosion/Explosion.tscn" type="PackedScene" id=19]
+[ext_resource path="res://sounds/HeroExplosionSound.mp3" type="AudioStream" id=20]
+[ext_resource path="res://sounds/Laser sound v3.mp3" type="AudioStream" id=21]
+[ext_resource path="res://assets/Alien Ship v4 l2 animated-1.png" type="Texture" id=22]
+[ext_resource path="res://assets/Alien Ship v4 l2 animated-2.png" type="Texture" id=23]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 22 ), ExtResource( 23 ) ],
+"loop": true,
+"name": "level_2",
+"speed": 3.0
+}, {
+"frames": [ ExtResource( 2 ), ExtResource( 1 ) ],
+"loop": true,
+"name": "default",
+"speed": 3.0
+} ]
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 16 ), ExtResource( 5 ), ExtResource( 4 ), ExtResource( 15 ), ExtResource( 13 ), ExtResource( 6 ), ExtResource( 17 ), ExtResource( 9 ), ExtResource( 7 ), ExtResource( 10 ), ExtResource( 12 ), ExtResource( 11 ), ExtResource( 8 ), ExtResource( 18 ), ExtResource( 14 ) ],
+"loop": false,
+"name": "default",
+"speed": 13.0
+} ]
+
+[node name="Enemy" type="Area2D" groups=[
+"enemies",
+]]
+position = Vector2( 1247.19, 313.299 )
+collision_layer = 2
+collision_mask = 0
+script = ExtResource( 3 )
+Explosion = ExtResource( 19 )
+
+[node name="Default" type="AnimatedSprite" parent="."]
+scale = Vector2( 0.5, 0.5 )
+frames = SubResource( 1 )
+frame = 1
+playing = true
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2( 3.62219, 0.482971 )
+polygon = PoolVector2Array( -55.4581, -15.4219, 0.259155, -15.5984, 8.54041, -23.632, 32.2917, -23.5901, 40.2899, -31.5175, 40.4097, 32.602, 32.3885, 24.3986, 8.40637, 24.5033, 0.439819, 16.744, -67.5236, 16.5267, -67.6787, -3.38947 )
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+
+[node name="Explosion" type="AnimatedSprite" parent="."]
+visible = false
+frames = SubResource( 2 )
+
+[node name="ExplosionSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 20 )
+volume_db = -10.0
+
+[node name="Movement" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[node name="LaserSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 21 )
+volume_db = -20.0
+
+[connection signal="area_entered" from="." to="." method="_on_Enemy_area_entered"]
+[connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="_on_Enemy_entered_screen"]
+[connection signal="animation_finished" from="Explosion" to="." method="_on_explosion_animation_finished"]
+[connection signal="timeout" from="Movement" to="." method="_on_Movement_timeout"]

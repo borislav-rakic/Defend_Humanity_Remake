@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Defend Humanity Deathscreen.mp3-096d8af0745f1a2c09b0777d77c30a05.mp3str"
+
+[deps]
+
+source_file="res://sounds/Defend Humanity Deathscreen.mp3"
+dest_files=[ "res://.import/Defend Humanity Deathscreen.mp3-096d8af0745f1a2c09b0777d77c30a05.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

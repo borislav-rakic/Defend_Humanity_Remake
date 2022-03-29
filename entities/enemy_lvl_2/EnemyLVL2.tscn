@@ -1,0 +1,51 @@
+[gd_scene load_steps=20 format=2]
+
+[ext_resource path="res://assets/Alien Ship v4 l2 animated-1.png" type="Texture" id=1]
+[ext_resource path="res://assets/Alien Ship v4 l2 animated-2.png" type="Texture" id=2]
+[ext_resource path="res://assets/explosion-8.png" type="Texture" id=3]
+[ext_resource path="res://assets/explosion-10.png" type="Texture" id=4]
+[ext_resource path="res://assets/explosion-12.png" type="Texture" id=5]
+[ext_resource path="res://assets/explosion-9.png" type="Texture" id=6]
+[ext_resource path="res://assets/explosion-13.png" type="Texture" id=7]
+[ext_resource path="res://assets/explosion-15.png" type="Texture" id=8]
+[ext_resource path="res://assets/explosion-11.png" type="Texture" id=9]
+[ext_resource path="res://assets/explosion-4.png" type="Texture" id=10]
+[ext_resource path="res://assets/explosion-5.png" type="Texture" id=11]
+[ext_resource path="res://assets/explosion-14.png" type="Texture" id=12]
+[ext_resource path="res://assets/explosion-1.png" type="Texture" id=13]
+[ext_resource path="res://assets/explosion-3.png" type="Texture" id=14]
+[ext_resource path="res://assets/explosion-2.png" type="Texture" id=15]
+[ext_resource path="res://assets/explosion-7.png" type="Texture" id=16]
+[ext_resource path="res://assets/explosion-6.png" type="Texture" id=17]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 1 ), ExtResource( 2 ) ],
+"loop": true,
+"name": "default",
+"speed": 3.0
+} ]
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 13 ), ExtResource( 15 ), ExtResource( 14 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 17 ), ExtResource( 16 ), ExtResource( 3 ), ExtResource( 6 ), ExtResource( 4 ), ExtResource( 9 ), ExtResource( 5 ), ExtResource( 7 ), ExtResource( 12 ), ExtResource( 8 ) ],
+"loop": false,
+"name": "default",
+"speed": 13.0
+} ]
+
+[node name="EnemyLVL2" type="Area2D"]
+scale = Vector2( 0.5, 0.5 )
+collision_layer = 2
+collision_mask = 0
+
+[node name="Default" type="AnimatedSprite" parent="."]
+frames = SubResource( 1 )
+playing = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( -127.953, 34.2204, -127.817, -5.77911, -103.736, -29.7244, 7.69176, -30.1326, 24.2357, -45.8876, 72.1263, -46.2958, 87.6364, -62.0779, 87.9085, 65.8117, 71.9903, 50.5738, 24.0997, 49.8936, 7.50125, 34.2475 )
+
+[node name="Explosion" type="AnimatedSprite" parent="."]
+visible = false
+frames = SubResource( 2 )
