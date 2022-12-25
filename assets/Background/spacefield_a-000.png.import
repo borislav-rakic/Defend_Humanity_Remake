@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/BackgroundBlack.png-65931ae4689debc9a74cb91fd89ce8d0.stex"
+path="res://.import/spacefield_a-000.png-d92df35bb57dcf988b52025da0482417.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/BackgroundBlack.png"
-dest_files=[ "res://.import/BackgroundBlack.png-65931ae4689debc9a74cb91fd89ce8d0.stex" ]
+source_file="res://assets/Background/spacefield_a-000.png"
+dest_files=[ "res://.import/spacefield_a-000.png-d92df35bb57dcf988b52025da0482417.stex" ]
 
 [params]
 
@@ -28,6 +28,7 @@ process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
 process/invert_color=false
+process/normal_map_invert_y=false
 stream=false
 size_limit=0
 detect_3d=true

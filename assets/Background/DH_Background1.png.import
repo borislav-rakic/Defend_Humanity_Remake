@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/DH_Background1.png-9b374c013b19fcb5e53ad73b1ea47042.stex"
+path="res://.import/DH_Background1.png-e245fd67f4f0bd827c3be998b73a259f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/DH_Background1.png"
-dest_files=[ "res://.import/DH_Background1.png-9b374c013b19fcb5e53ad73b1ea47042.stex" ]
+source_file="res://assets/Background/DH_Background1.png"
+dest_files=[ "res://.import/DH_Background1.png-e245fd67f4f0bd827c3be998b73a259f.stex" ]
 
 [params]
 
@@ -28,6 +28,7 @@ process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
 process/invert_color=false
+process/normal_map_invert_y=false
 stream=false
 size_limit=0
 detect_3d=true

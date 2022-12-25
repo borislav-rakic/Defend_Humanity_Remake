@@ -4,9 +4,11 @@ signal laser_shot
 signal player_eliminated
 signal life_lost
 
+export (PackedScene) var Laser
 export var speed = 400
 var velocity = Vector2()
 var lives = 4
+var shoot_enabled = true
 var screen_size
 var invincibility = false
 var explosion_has_happened = false
@@ -38,7 +40,7 @@ func play_again():
 	$Explosion.playing = false
 	$Explosion.frame = 1
 
-func _process(delta):
+func _physics_process(delta):
 	# Checks wether the player wants to move in a direction
 	velocity = Vector2()
 	if Input.is_action_pressed("ui_up"):
@@ -52,10 +54,27 @@ func _process(delta):
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * speed
 	
+	if Input.is_action_pressed("ui_select") && shoot_enabled:
+		player_shoot()
+	
 	position += velocity * delta
 	
 	position.x = clamp(position.x, 0, screen_size.x / 2 - 100)
 	position.y = clamp(position.y, 0, screen_size.y)
+
+# Handles the shooting for the player
+func player_shoot():
+	$LaserSound.playing = true
+	var laser = Laser.instance()
+	get_parent().add_child(laser)
+	laser.position.x = position.x + 87.5
+	laser.position.y = position.y + 17.5
+	$LaserCooldown.start()
+	shoot_enabled = false
+
+# Reenables the shooting function after the cooldown
+func enable_shoot():
+	shoot_enabled = true
 
 # This function is called when the player was hit
 func _on_Player_area_entered(area):

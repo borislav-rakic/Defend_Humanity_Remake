@@ -6,15 +6,37 @@
 [ext_resource path="res://entities/laser/Laser.tscn" type="PackedScene" id=4]
 [ext_resource path="res://hud/HUD.tscn" type="PackedScene" id=5]
 [ext_resource path="res://entities/explosion/Explosion.tscn" type="PackedScene" id=6]
-[ext_resource path="res://sounds/Laser sound v3.mp3" type="AudioStream" id=7]
 [ext_resource path="res://entities/enemy_laser/EnemyLaser.tscn" type="PackedScene" id=8]
-[ext_resource path="res://moving_background/MovingBackground.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Background/Background.tscn" type="PackedScene" id=9]
 [ext_resource path="res://sounds/Defend Humanity main theme.mp3" type="AudioStream" id=10]
 [ext_resource path="res://sounds/Defend Humanity main theme 2.mp3" type="AudioStream" id=11]
 [ext_resource path="res://sounds/Defend Humanity Deathscreen (2).mp3" type="AudioStream" id=12]
 [ext_resource path="res://sounds/Defend Humanity death theme.mp3" type="AudioStream" id=13]
 [ext_resource path="res://sounds/Defend Humanity menu theme 8bit.mp3" type="AudioStream" id=14]
 [ext_resource path="res://entities/power_ups/life/Life.tscn" type="PackedScene" id=15]
+
+[sub_resource type="Animation" id=3]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/path = NodePath(".:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 960, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath(".:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 810, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
 
 [sub_resource type="Animation" id=1]
 resource_name = "player_start_animation"
@@ -27,7 +49,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"points": PoolRealArray( 512, -0.25, 0, 0.25, 0, 256, -0.25, 0, 0.25, 0 ),
+"points": PoolRealArray( 960, -0.25, 0, 0.25, 0, 480, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0, 5.56 )
 }
 tracks/1/type = "bezier"
@@ -37,18 +59,16 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"points": PoolRealArray( 450, -0.25, 0, 0.25, 0, 300, -0.25, 0, 0.25, 0 ),
+"points": PoolRealArray( 810, -0.25, 0, 0.25, 0, 540, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0, 5.56 )
 }
 
 [sub_resource type="Curve2D" id=2]
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 1191.05, 54.5013, 0, 0, 0, 0, 1193.28, 533.45 )
+"points": PoolVector2Array( 0, 0, 0, 0, 1191.05, 54.5013, 0, 0, 0, 0, 1192, 923 )
 }
 
-[node name="Main" type="Node" groups=[
-"lasers",
-]]
+[node name="Main" type="Node" groups=["lasers"]]
 script = ExtResource( 2 )
 Enemy = ExtResource( 3 )
 Laser = ExtResource( 4 )
@@ -56,28 +76,23 @@ Explosion = ExtResource( 6 )
 EnemyLaser = ExtResource( 8 )
 Life = ExtResource( 15 )
 
-[node name="MovingBackground" parent="." instance=ExtResource( 9 )]
+[node name="Background" parent="." instance=ExtResource( 9 )]
+layer = -1
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 256, 300 )
+position = Vector2( 960, 810 )
 
 [node name="PlayerStartAnimation" type="AnimationPlayer" parent="Player"]
+anims/RESET = SubResource( 3 )
 anims/player_start_animation = SubResource( 1 )
 
-[node name="LaserCooldown" type="Timer" parent="."]
-wait_time = 0.2
-one_shot = true
-
 [node name="EnemySpawn" type="Path2D" parent="."]
+position = Vector2( 1000, 50 )
 curve = SubResource( 2 )
 
 [node name="EnemySpawnLocation" type="PathFollow2D" parent="EnemySpawn"]
 position = Vector2( 1191.05, 54.5013 )
-rotation = 1.56613
-
-[node name="LaserSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 7 )
-volume_db = -10.0
+rotation = 1.56967
 
 [node name="Enemy1LaserCooldown" type="Timer" parent="."]
 wait_time = 2.0
@@ -115,7 +130,6 @@ one_shot = true
 
 [connection signal="life_lost" from="Player" to="." method="change_lifemeter_texture"]
 [connection signal="player_eliminated" from="Player" to="." method="game_over"]
-[connection signal="timeout" from="LaserCooldown" to="." method="enable_shoot_function"]
 [connection signal="timeout" from="Enemy1LaserCooldown" to="." method="enable_enemy1_shoot"]
 [connection signal="timeout" from="Enemy2LaserCooldown" to="." method="enable_enemy2_shoot"]
 [connection signal="game_started" from="HUD" to="." method="game_started"]

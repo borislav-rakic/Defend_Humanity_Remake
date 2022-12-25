@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://assets/U.S.F. Default V2 animated-1.png" type="Texture" id=1]
 [ext_resource path="res://assets/U.S.F. Default V2 animated-2.png" type="Texture" id=2]
@@ -19,6 +19,8 @@
 [ext_resource path="res://assets/explosion-6.png" type="Texture" id=17]
 [ext_resource path="res://assets/explosion-7.png" type="Texture" id=18]
 [ext_resource path="res://sounds/HeroExplosionSound.mp3" type="AudioStream" id=19]
+[ext_resource path="res://entities/laser/Laser.tscn" type="PackedScene" id=20]
+[ext_resource path="res://sounds/Laser sound v3.mp3" type="AudioStream" id=21]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -37,13 +39,14 @@ animations = [ {
 } ]
 
 [node name="Player" type="Area2D"]
+scale = Vector2( 1.75, 1.75 )
 collision_mask = 8
 script = ExtResource( 3 )
+Laser = ExtResource( 20 )
 
 [node name="Default" type="AnimatedSprite" parent="."]
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 1 )
-frame = 1
 playing = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
@@ -58,8 +61,17 @@ one_shot = true
 visible = false
 frames = SubResource( 2 )
 
+[node name="LaserSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 21 )
+volume_db = -10.0
+
 [node name="ExplosionSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 19 )
 volume_db = -10.0
 
+[node name="LaserCooldown" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
 [connection signal="area_entered" from="." to="." method="_on_Player_area_entered"]
+[connection signal="timeout" from="LaserCooldown" to="." method="enable_shoot"]

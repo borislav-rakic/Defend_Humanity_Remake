@@ -9,7 +9,6 @@ export (PackedScene) var Explosion
 export (PackedScene) var EnemyLaser
 export (PackedScene) var Life
 var score = 0
-var shoot_enabled = true
 var enemy1_shoot_enabled = false
 var enemy2_shoot_enabled = false
 var enemies
@@ -111,8 +110,8 @@ func return_to_home():
 	$HUD/HomeButton.visible = false
 	$HUD/PlayAgainButton.visible = false
 	$DeathScreenTheme.playing = false
-	$Player.position.x = screen_size.x / 2
-	$Player.position.y = screen_size.y - screen_size.y / 4
+	$Player.position.x = 1920 / 2
+	$Player.position.y = 1080 - 1080 / 4
 	$Player/Explosion.visible = false
 	$Player/Default.visible = true
 	$HUD/Title.visible = true
@@ -134,9 +133,6 @@ func _process(delta):
 	if get_tree().get_nodes_in_group("enemies").size() < 2:
 		spawn_enemy()
 	
-	if Input.is_action_pressed("ui_select") && shoot_enabled:
-		player_shoot()
-	
 	enemies = get_tree().get_nodes_in_group("enemies")
 	
 	enemies[0].connect("enemy_eliminated", self, "disable_enemy1_shoot")
@@ -152,7 +148,7 @@ func _process(delta):
 func enemy1_shoot(enemy):
 	enemy1_shoot_enabled = false
 	$Enemy1LaserCooldown.start()
-	$LaserSound.play()
+	#$LaserSound.play()
 	var enemy_laser = EnemyLaser.instance()
 	add_child(enemy_laser)
 	enemy_laser.position.x = enemy.position.x - 62
@@ -161,7 +157,7 @@ func enemy1_shoot(enemy):
 func enemy2_shoot(enemy):
 	enemy2_shoot_enabled = false
 	$Enemy2LaserCooldown.start()
-	$LaserSound.play()
+	#$LaserSound.play()
 	var enemy_laser = EnemyLaser.instance()
 	add_child(enemy_laser)
 	enemy_laser.position.x = enemy.position.x - 62
@@ -207,18 +203,6 @@ func spawn_enemy():
 	
 	if level_2_reached:
 		emit_signal("level_2_reached")
-
-func player_shoot():
-	$LaserSound.playing = true
-	var laser = Laser.instance()
-	add_child(laser)
-	laser.position.x = $Player.position.x + 50
-	laser.position.y = $Player.position.y + 10
-	$LaserCooldown.start()
-	shoot_enabled = false
-
-func enable_shoot_function():
-	shoot_enabled = true
 
 func change_lifemeter_texture():
 	player_lives -= 1

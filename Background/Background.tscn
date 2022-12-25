@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://assets/Background/spacefield_a-000.png" type="Texture" id=1]
+
+[node name="Background" type="CanvasLayer"]
+scale = Vector2( 1.25, 1.25 )
+transform = Transform2D( 1.25, 0, 0, 1.25, 0, 0 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_right = 1920.0
+margin_bottom = 1080.0
+texture = ExtResource( 1 )
+stretch_mode = 5
